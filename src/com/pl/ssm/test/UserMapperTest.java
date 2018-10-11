@@ -10,7 +10,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.pl.ssm.mapper.OrdersMapperCustom;
 import com.pl.ssm.mapper.UserMapper;
+import com.pl.ssm.pojo.Orders;
+import com.pl.ssm.pojo.OrdersCustom;
 import com.pl.ssm.pojo.User;
 import com.pl.ssm.pojo.UserCustom;
 import com.pl.ssm.pojo.UserQueryVo;
@@ -19,15 +22,17 @@ public class UserMapperTest {
 
 	public static SqlSessionFactory sqlSessionFactory;
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 
 		UserMapperTest userMapperTest = new UserMapperTest();
 		userMapperTest.setUp();
 		// userMapperTest.testFindUserById(1);
 		// userMapperTest.testFindUserByName("a");
-		userMapperTest.testFindUserList();
+		//userMapperTest.testFindUserList();
 		//userMapperTest.testFindUserCount();
 		//userMapperTest.testFindUserByIdResultMap(1);
+		//userMapperTest.testFindOrdersUser();
+		userMapperTest.testFindOrdersUserResultMap();
 	}
 
 	public void setUp() throws IOException {
@@ -105,5 +110,27 @@ public class UserMapperTest {
 		
 		sqlSession.close();
 		System.out.println(count);
+	}
+	
+	public void testFindOrdersUser() throws Exception {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		//创建代理对象
+		OrdersMapperCustom ordersMapperCustom=sqlSession.getMapper(OrdersMapperCustom.class);
+		//调用mapper方法
+		List<OrdersCustom> list=ordersMapperCustom.findOrdersUser();
+		System.out.println(list);
+		sqlSession.close();
+	}
+	
+	public void testFindOrdersUserResultMap() throws Exception {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		//创建代理对象
+		OrdersMapperCustom ordersMapperCustom=sqlSession.getMapper(OrdersMapperCustom.class);
+		//调用mapper方法
+		List<Orders> list=ordersMapperCustom.findOrdersUserResultMap();
+		System.out.println(list);
+		sqlSession.close();
 	}
 }

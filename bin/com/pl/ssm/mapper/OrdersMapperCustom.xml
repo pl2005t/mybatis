@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="com.pl.ssm.mapper.userMapper"> -->
+<mapper namespace="com.pl.ssm.mapper.OrdersMapperCustom">
+<!--定义resultMap  
+将查询结果映射到com.pl.ssm.pojo.Orders中
+-->
+<resultMap type="com.pl.ssm.pojo.Orders" id="OrdersUserResultMap">
+<!--配置要映射的订单信息
+id:指定查询列中的唯一标识，如果有多个列组成唯一标识，则配置多个id
+  -->
+<id column="id" property="id"/>
+<result column="user_cid" property="userCid"/>
+<result column="number" property="number"/>
+<result column="createtime" property="createtime"/>
+<result column="note" property="note"/>
+<!--配置要映射的关联用户信息  
+association:用于映射关联查询单个对象的信息
+property:要将关联查询的用户信息映射到Orders中哪个属性
+-->
+<association property="user" javaType="com.pl.ssm.pojo.User">
+<id column="user_cid" property="cid"/>
+<result column="name" property="name"/>
+<result column="sex" property="sex"/>
+<result column="cardDate" property="cardDate"/>
+</association>
+</resultMap>
+	<!-- 查询订单关联查询用户 -->
+	<select id="findOrdersUser"
+		resultType="com.pl.ssm.pojo.OrdersCustom">
+		SELECT
+		orders.*, carddb.name, carddb.sex, carddb.cardDate
+		FROM
+		orders,
+		carddb
+		WHERE
+		orders.user_cid = carddb.cid;
+	</select>
+	
+	<!-- 查询订单关联查询用户,使用resultMap -->
+	<select id="findOrdersUserResultMap"
+		resultMap="OrdersUserResultMap">
+		SELECT
+		orders.*, carddb.name, carddb.sex, carddb.cardDate
+		FROM
+		orders,
+		carddb
+		WHERE
+		orders.user_cid = carddb.cid;
+	</select>
+</mapper>
