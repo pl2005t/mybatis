@@ -1,6 +1,7 @@
 package com.pl.ssm.pojo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Orders {
 	private Integer id;
@@ -9,7 +10,14 @@ public class Orders {
 	private Date createtime;
 	private String note;
 	private User user;
+	private List<OrdersDetail> ordersDetails;
 	
+	public List<OrdersDetail> getOrdersDetails() {
+		return ordersDetails;
+	}
+	public void setOrdersDetails(List<OrdersDetail> ordersDetails) {
+		this.ordersDetails = ordersDetails;
+	}
 	public User getUser() {
 		return user;
 	}

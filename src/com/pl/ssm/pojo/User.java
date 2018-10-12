@@ -2,6 +2,7 @@ package com.pl.ssm.pojo;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 public class User {
 	 	private int cid;
@@ -9,6 +10,13 @@ public class User {
 	 	private String sex;
 	 	private Date cardDate;
 	 	 private BigDecimal deposit;
+	 	 private  List<Orders> ordersList;
+		public List<Orders> getOrdersList() {
+			return ordersList;
+		}
+		public void setOrdersList(List<Orders> ordersList) {
+			this.ordersList = ordersList;
+		}
 		public int getCid() {
 			return cid;
 		}

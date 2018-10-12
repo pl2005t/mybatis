@@ -32,7 +32,10 @@ public class UserMapperTest {
 		//userMapperTest.testFindUserCount();
 		//userMapperTest.testFindUserByIdResultMap(1);
 		//userMapperTest.testFindOrdersUser();
-		userMapperTest.testFindOrdersUserResultMap();
+		//userMapperTest.testFindOrdersUserResultMap();
+		//userMapperTest.testFindOrdersAndOrdersDetailResultMap();
+		//userMapperTest.testFindUserAndItemsResultMap();
+		userMapperTest.testFindOrdersUserlazyLoading();
 	}
 
 	public void setUp() throws IOException {
@@ -131,6 +134,41 @@ public class UserMapperTest {
 		//调用mapper方法
 		List<Orders> list=ordersMapperCustom.findOrdersUserResultMap();
 		System.out.println(list);
+		sqlSession.close();
+	}
+	
+	public void testFindOrdersAndOrdersDetailResultMap() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		//创建代理对象
+		OrdersMapperCustom ordersMapperCustom=sqlSession.getMapper(OrdersMapperCustom.class);
+		//调用mapper方法
+		List<Orders> list=ordersMapperCustom.findOrdersAndOrdersDetailResultMap();
+		System.out.println(list);
+		sqlSession.close();
+	}
+	
+	public void testFindUserAndItemsResultMap() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		//创建代理对象
+		OrdersMapperCustom ordersMapperCustom=sqlSession.getMapper(OrdersMapperCustom.class);
+		//调用mapper方法
+		List<User> list=ordersMapperCustom.findUserAndItemsResultMap();
+		System.out.println(list);
+		sqlSession.close();
+	}
+	
+	//延迟加载
+	public void testFindOrdersUserlazyLoading() throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		//创建代理对象
+		OrdersMapperCustom ordersMapperCustom=sqlSession.getMapper(OrdersMapperCustom.class);
+		//调用mapper方法
+		List<Orders> list=ordersMapperCustom.findOrdersUserlazyLoading();
+		for (Orders orders : list) {
+			//实现按需加载
+			User user=orders.getUser();
+			System.out.println(user);
+		}	
 		sqlSession.close();
 	}
 }
