@@ -11,6 +11,8 @@
 	 <setting name="lazyLoadingEnabled" value="true"/>
 	 <!--将积极加载改为消极加载  -->
 	 <setting name="aggressiveLazyLoading" value="false"/>
+	 <!-- 开启二级缓存 -->
+	 <setting name="cacheEnabled" value="true"/>
 	 </settings>
 	<!--别名定义  -->
 	<typeAliases>
@@ -29,6 +31,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 			<!--jdbc:mysql://localhost:3306/user?useSSL=false&amp;serverTimezone=UTC  -->
+			<!-- 注意：如果用spring，则这里要用driverClassName -->
 				<property name="driver" value="${jdbc.driver}" />
 				<property name="url" value="${jdbc.url}" />
 				<property name="username" value="${jdbc.username}" />

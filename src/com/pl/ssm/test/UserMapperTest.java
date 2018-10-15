@@ -171,4 +171,6 @@ public class UserMapperTest {
 		}	
 		sqlSession.close();
 	}
+	
+	
 }

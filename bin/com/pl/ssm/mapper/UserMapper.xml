@@ -5,6 +5,10 @@
 <!-- <mapper namespace="com.pl.ssm.mapper.userMapper"> -->
 <mapper namespace="com.pl.ssm.mapper.UserMapper">
 
+<!--开启本mapper下的 namespace下的二级缓存 
+type:指定cache接口的实现类的类型，默认使用PerpetualCache，如果要和ehcache，redis等第三方接口整合，需要配置type为他们实现cache接口的类型
+-->
+<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 	<!-- 定义sql片段 id:sql片段的唯一标识 基于单表定义sql片段，可重用性高 在片段中不包括where -->
 	<sql id="query_user_where">
 

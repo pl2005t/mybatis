@@ -1,11 +1,16 @@
 package com.pl.ssm.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
-public class User {
-	 	private int cid;
+public class User implements Serializable{
+	 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+		private int cid;
 	 	private String name;
 	 	private String sex;
 	 	private Date cardDate;
